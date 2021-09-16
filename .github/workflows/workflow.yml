@@ -9,22 +9,31 @@ on:
 jobs: 
   pr:
     runs-on: ubuntu-latest
-    env:
-      PR_NUMBER: ${{ github.event.number }}
-    if: github.event.number != null
+    if: github.event.number != null #  this only runs when in a PR
     steps:
     - run: |
-        echo "GITHUB_REF: $GITHUB_REF"
-        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-        echo "PR #: ${{ env.PR_NUMBER }}"
+        echo "Deploy code to PR#${{ github.event.number }}"
 
   dev:
     runs-on: ubuntu-latest
-    env:
-      PR_NUMBER: ${{ github.event.number }}
-    if: github.event.number == null
+    if: github.event.number == null #Should be nothing, as this doesn't run on a PR
     steps:
     - run: |
-        echo "GITHUB_REF: $GITHUB_REF"
-        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-        echo "PR #: ${{ env.PR_NUMBER }}"
+        echo "Deploy code to dev"
+
+
+  qa:
+    runs-on: ubuntu-latest
+    if: github.event.number == null #Should be nothing, as this doesn't run on a PR
+    steps:
+    - run: |
+        echo "Deploy code to qa"
+ 
+ 
+  prod:
+    runs-on: ubuntu-latest
+    if: github.event.number == null #Should be nothing, as this doesn't run on a PR
+    steps:
+    - run: |
+        echo "Deploy code to production"
+ 
