@@ -16,7 +16,7 @@ jobs:
     #if: (success() && (variables['Build.Reason'] == 'PullRequest') && (variables['System.PullRequest.PullRequestId'] != 'Null'))
     steps:
     - run: |
-        echo "GITHUB_HEAD_REF ${{ GITHUB_HEAD_REF }}"
+        echo "GITHUB_HEAD_REF ${{ GITHUB.HEAD_REF }}"
         echo "GITHUB_WORKSPACE: ${{ GITHUB.WORKSPACE }}"
         #prId: "$(System.PullRequest.PullRequestId)"
         # if eq(variables['Build.SourceBranchName'], 'master')
