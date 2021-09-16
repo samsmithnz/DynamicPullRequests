@@ -18,5 +18,5 @@ jobs:
     - run: |
         echo  $GITHUB_HEAD_REF
         #prId: "$(System.PullRequest.PullRequestId)"
-        #${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+        # if eq(variables['Build.SourceBranchName'], 'master')
         #prId: '000'
