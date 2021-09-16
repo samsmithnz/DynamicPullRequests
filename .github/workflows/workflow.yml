@@ -9,6 +9,8 @@ on:
 jobs: 
   pr:
     runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.number }}
     #env:
     #  prId: 000
     #  prUC: PR${{ env.prId }}
@@ -18,7 +20,7 @@ jobs:
     - run: |
         echo "GITHUB_REF: $GITHUB_REF"
         echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-        echo "PR #: ${{ github.event.pull_request.number }}""
+        echo "PR #: ${{ env.PR_NUMBER }}"
         #prId: "$(System.PullRequest.PullRequestId)"
         # if eq(variables['Build.SourceBranchName'], 'master')
         #prId: '000'
