@@ -18,7 +18,7 @@ jobs:
     - run: |
         echo "GITHUB_REF: $GITHUB_REF"
         echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
-        echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF"
+        echo "PR #: ${{ github.event.pull_request.number }}""
         #prId: "$(System.PullRequest.PullRequestId)"
         # if eq(variables['Build.SourceBranchName'], 'master')
         #prId: '000'
