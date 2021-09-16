@@ -11,16 +11,20 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PR_NUMBER: ${{ github.event.number }}
-    #env:
-    #  prId: 000
-    #  prUC: PR${{ env.prId }}
-    #  prLC: pr${{ env.prId }}
-    #if: (success() && (variables['Build.Reason'] == 'PullRequest') && (variables['System.PullRequest.PullRequestId'] != 'Null'))
+    if: github.event.number != null
     steps:
     - run: |
         echo "GITHUB_REF: $GITHUB_REF"
         echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
         echo "PR #: ${{ env.PR_NUMBER }}"
-        #prId: "$(System.PullRequest.PullRequestId)"
-        # if eq(variables['Build.SourceBranchName'], 'master')
-        #prId: '000'
+
+  dev:
+    runs-on: ubuntu-latest
+    env:
+      PR_NUMBER: ${{ github.event.number }}
+    if: github.event.number == null
+    steps:
+    - run: |
+        echo "GITHUB_REF: $GITHUB_REF"
+        echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+        echo "PR #: ${{ env.PR_NUMBER }}"
