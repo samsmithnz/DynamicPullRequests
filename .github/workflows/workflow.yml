@@ -13,6 +13,12 @@ jobs:
     steps:
     - run: |
         echo "Deploy code to PR#${{ github.event.number }}"
+    - name: Log into Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_SP }} 
+    - run: az group create --name "MyApplicationPR${{ github.event.number }}" --location eastus
+      shell: pwsh
 
   dev:
     runs-on: ubuntu-latest
@@ -20,6 +26,12 @@ jobs:
     steps:
     - run: |
         echo "Deploy code to dev"
+    - name: Log into Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_SP }} 
+    - run: az group create --name MyApplicationDev --location eastus
+      shell: pwsh
 
 
   qa:
@@ -28,6 +40,12 @@ jobs:
     steps:
     - run: |
         echo "Deploy code to qa"
+    - name: Log into Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_SP }} 
+    - run: az group create --name MyApplicationQA --location eastus
+      shell: pwsh
  
  
   prod:
@@ -36,4 +54,10 @@ jobs:
     steps:
     - run: |
         echo "Deploy code to production"
+    - name: Log into Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_SP }} 
+    - run: az group create --name MyApplicationProd --location eastus
+      shell: pwsh
  
