@@ -14,5 +14,5 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_SP }} 
-    - run: az group delete --name "MyApplicationPR${{ github.event.number }}"
+    - run: az group delete --name "MyApplicationPR${{ github.event.number }} --yes
       shell: pwsh
