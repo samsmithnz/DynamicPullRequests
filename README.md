@@ -1,4 +1,4 @@
-# DynamicPullRequests
+# Dynamic Pull Requests
 
 Demo that creates resource groups for each environment. When a PR is created, a special PR resource group is created, MyApplicationPR##, where ## is the PR number.
 
