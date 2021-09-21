@@ -23,7 +23,10 @@ The new workflow is:
 2. developer starts their work. When ready (note - not nessecarily "done"), the developer pushes and creates a draft PR. 
 3. This triggers the CI/CD pipeline. Note that only the PR job runs
    ![image](https://user-images.githubusercontent.com/8389039/134182299-e26a2585-d00d-4ceb-97bb-f11d60b2708d.png)
-4. The PR job creates a new and unique resource group just for this PR
+4. The PR job creates a new and unique resource group just for this PR.
+5. When the PR is done, it's converted to a PR, approved, reviewed, and closed. This triggers a webhook, that will delete the PR
+   ![image](https://user-images.githubusercontent.com/8389039/134184428-13b9e62b-db5a-4a59-89f7-34055fc250b2.png)
+6. The main CI/CD pipeline will also run, skipping the PR phase 
 
 
 
