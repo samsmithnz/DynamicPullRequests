@@ -7,9 +7,15 @@ on:
   workflow_dispatch:
 
 jobs: 
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Build and unit test our code"
+      
   pr:
     runs-on: ubuntu-latest
     if: github.event.number != null #  this only runs when in a PR
+    needs: [build]
     steps:
     - run: echo "Deploy code to PR#${{ github.event.number }}"
     - name: Log into Azure
@@ -23,6 +29,7 @@ jobs:
   dev:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # only run on the main trunk
+    needs: [build]
     steps:
     - run: echo "Deploy code to dev"
     - name: Log into Azure
@@ -37,6 +44,7 @@ jobs:
   qa:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # only run on the main trunk
+    needs: [dev]
     steps:
     - run: echo "Deploy code to qa"
     - name: Log into Azure
@@ -51,6 +59,7 @@ jobs:
   prod:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' # only run on the main trunk
+    needs: [qa]
     steps:
     - run: echo "Deploy code to production"
     - name: Log into Azure
