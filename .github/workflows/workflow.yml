@@ -22,7 +22,7 @@ jobs:
 
   dev:
     runs-on: ubuntu-latest
-    if: github.event.number == null #Should be nothing, as this doesn't run on a PR
+    if: github.ref == 'refs/heads/main' # only run on the main trunk
     steps:
     - run: echo "Deploy code to dev"
     - name: Log into Azure
@@ -36,7 +36,7 @@ jobs:
 
   qa:
     runs-on: ubuntu-latest
-    if: github.event.number == null #Should be nothing, as this doesn't run on a PR
+    if: github.ref == 'refs/heads/main' # only run on the main trunk
     steps:
     - run: echo "Deploy code to qa"
     - name: Log into Azure
@@ -50,7 +50,7 @@ jobs:
  
   prod:
     runs-on: ubuntu-latest
-    if: github.event.number == null #Should be nothing, as this doesn't run on a PR
+    if: github.ref == 'refs/heads/main' # only run on the main trunk
     steps:
     - run: echo "Deploy code to production"
     - name: Log into Azure
