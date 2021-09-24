@@ -8,11 +8,11 @@ jobs:
   cleanup:
     runs-on: ubuntu-latest
     steps:
-    - run: |
-        echo "Deleting PR#${{ github.event.number }}"
+    - run: echo "Deleting PR#${{ github.event.number }}"
     - name: Log into Azure
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_SP }} 
-    - run: az group delete --name "MyApplicationPR${{ github.event.number }}" --yes
+    - name: Clean up PR environment
+      run: az group delete --name "MyApplicationPR${{ github.event.number }}" --yes
       shell: pwsh
