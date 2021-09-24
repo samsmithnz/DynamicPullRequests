@@ -11,26 +11,26 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.number != null #  this only runs when in a PR
     steps:
-    - run: |
-        echo "Deploy code to PR#${{ github.event.number }}"
+    - run: echo "Deploy code to PR#${{ github.event.number }}"
     - name: Log into Azure
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_SP }} 
-    - run: az group create --name "MyApplicationPR${{ github.event.number }}" --location eastus
+    - name: Create new PR environment and deploy code
+      run: az group create --name "MyApplicationPR${{ github.event.number }}" --location eastus
       shell: pwsh
 
   dev:
     runs-on: ubuntu-latest
     if: github.event.number == null #Should be nothing, as this doesn't run on a PR
     steps:
-    - run: |
-        echo "Deploy code to dev"
+    - run: echo "Deploy code to dev"
     - name: Log into Azure
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_SP }} 
-    - run: az group create --name MyApplicationDev --location eastus
+    - name: Create new Dev environment and deploy code
+      run: az group create --name MyApplicationDev --location eastus
       shell: pwsh
 
 
@@ -38,13 +38,13 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.number == null #Should be nothing, as this doesn't run on a PR
     steps:
-    - run: |
-        echo "Deploy code to qa"
+    - run: echo "Deploy code to qa"
     - name: Log into Azure
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_SP }} 
-    - run: az group create --name MyApplicationQA --location eastus
+    - name: Create new QA environment and deploy code
+      run: az group create --name MyApplicationQA --location eastus
       shell: pwsh
  
  
@@ -52,12 +52,12 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.number == null #Should be nothing, as this doesn't run on a PR
     steps:
-    - run: |
-        echo "Deploy code to production"
+    - run: echo "Deploy code to production"
     - name: Log into Azure
       uses: azure/login@v1
       with:
         creds: ${{ secrets.AZURE_SP }} 
-    - run: az group create --name MyApplicationProd --location eastus
+    - name: Create new Prod environment and deploy code
+      run: az group create --name MyApplicationProd --location eastus
       shell: pwsh
  
